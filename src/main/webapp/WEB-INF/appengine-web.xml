@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<appengine-web-app xmlns="http://appengine.google.com/ns/1.0">
+
+    <service>default</service>
+    
+    <sessions-enabled>true</sessions-enabled>
+    <async-session-persistence enabled="true"/>    
+
+    <runtime>java8</runtime>
+    <threadsafe>true</threadsafe>
+    
+    <precompilation-enabled>true</precompilation-enabled>
+
+    <instance-class>F1</instance-class>
+
+    <system-properties>
+        <property name="java.util.logging.config.file" value="WEB-INF/logging.properties"/>
+    </system-properties>
+    
+    <env-variables>
+        <env-var name="PUBSUB_VERIFICATION_TOKEN" value="xxxxxxx" />
+    </env-variables>    
+    
+</appengine-web-app>
