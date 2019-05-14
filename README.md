@@ -9,7 +9,7 @@ With focus on Java running on App Engine (Although can be on any infrastructure)
 ## Setup Partner Procurement API
 
 - Generate the API using [google-client-api-generator](https://github.com/google/apis-client-generator)
-- Grant **Service Account Token Creator** role to your infrastructure default service account. On gae is usuall <project-id>@appspot.serviceaccount.com
+- [Grant Service Account Token Creator](https://medium.com/google-cloud/using-serviceaccountactor-iam-role-for-account-impersonation-on-google-cloud-platform-a9e7118480ed) role to your infrastructure default service account, on the xxx-public service account you shared with Google, to allow impersonated calls from App Engine. On app-engine the default service account has the following pattern: <project-id>@appspot.serviceaccount.com
 - Build the Partner procurement service with the impersonated credentials
 
 ```java
