@@ -1,14 +1,16 @@
 # GCP Marketplace Java sample integration
 
-This sample is complimentary to the official integration documentation found at
-
-https://cloud.google.com/marketplace/docs/partners/integrated-saas/technical-integration-setup
+This sample is complimentary to the [official integration documentation](https://cloud.google.com/marketplace/docs/partners/integrated-saas/technical-integration-setup).
 
 With focus on Java running on App Engine (Although can be on any infrastructure)
 
+You can browse [com.bkper.billing.google](https://github.com/bkper/gcp-marketplace-sample-java/tree/master/src/main/java/com/bkper/billing/google) package for more details
+
 ## Setup Partner Procurement API
 
-- Generate the API using [google-client-api-generator](https://github.com/google/apis-client-generator).
+The parner procurement API was generated with the [google-client-api-generator](https://github.com/google/apis-client-generator)
+
+- Add the jar to the project.
 - [Grant Service Account Token Creator role](https://medium.com/google-cloud/using-serviceaccountactor-iam-role-for-account-impersonation-on-google-cloud-platform-a9e7118480ed) to the App Engine default service account ([project-id]@appspot.serviceaccount.com), on the xxx-public service account you shared with Google.
 - Build the Partner procurement service with the impersonated credentials:
 
