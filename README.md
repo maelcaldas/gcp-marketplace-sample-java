@@ -1,6 +1,6 @@
 # GCP Marketplace Java sample integration
 
-This is sample is complimentary to the official documentation found at
+This sample is complimentary to the official integration documentation found at
 
 https://cloud.google.com/marketplace/docs/partners/integrated-saas/technical-integration-setup
 
