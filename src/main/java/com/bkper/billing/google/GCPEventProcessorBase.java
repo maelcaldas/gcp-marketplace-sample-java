@@ -15,7 +15,7 @@ public abstract class GCPEventProcessorBase implements GCPEventProcessor {
     public static String PROVIDER_PATH = "providers/" + PARTNER_ID;
 
     @Inject
-    protected GCPAccountRepository gpaAccountRepository;
+    protected GCPAccountRepository gcpAccountRepository;
 
     @Inject
     protected BillingService billingService;

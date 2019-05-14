@@ -13,12 +13,12 @@ public class GCPEventProcessorAccountDeleted extends GCPEventProcessorBase {
     @Transact(TxnType.REQUIRED)
     public void processMessage(GCPPubsubMessageData message) throws IOException {
         String gcpAccountId = message.getAccount().getId();
-        GCPAccount gcpAccount = gpaAccountRepository.loadById(gcpAccountId);
+        GCPAccount gcpAccount = gcpAccountRepository.loadById(gcpAccountId);
         if (gcpAccount.getUserId() != null) {
             BkperUser user = registeredUserService.findById(gcpAccount.getUserId());
             billingService.updateBilling(user, null);
         }
-        gpaAccountRepository.delete(gcpAccount);
+        gcpAccountRepository.delete(gcpAccount);
     }
 
 }

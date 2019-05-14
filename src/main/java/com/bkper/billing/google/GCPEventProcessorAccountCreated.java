@@ -10,11 +10,11 @@ public class GCPEventProcessorAccountCreated extends GCPEventProcessorBase {
     @Transact(TxnType.REQUIRED)
     public void processMessage(GCPPubsubMessageData message) {
         String gcpAccountId = message.getAccount().getId();
-        GCPAccount account = gpaAccountRepository.loadById(gcpAccountId);
+        GCPAccount account = gcpAccountRepository.loadById(gcpAccountId);
         if (account == null) {
             account = new GCPAccount(gcpAccountId);
         }
-        gpaAccountRepository.persist(account);
+        gcpAccountRepository.persist(account);
     }
 
 }

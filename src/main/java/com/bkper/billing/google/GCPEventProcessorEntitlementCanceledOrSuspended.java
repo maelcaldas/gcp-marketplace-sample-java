@@ -18,7 +18,7 @@ public class GCPEventProcessorEntitlementCanceledOrSuspended extends GCPEventPro
         Entitlement entitlement = getEntitlement(entitlementId);
         Account account = procurementService.providers().accounts().get(entitlement.getAccount()).execute();
         String gcpAccountId = getAccountId(account);
-        GCPAccount gcpAccount = gpaAccountRepository.loadById(gcpAccountId);
+        GCPAccount gcpAccount = gcpAccountRepository.loadById(gcpAccountId);
 
         if (gcpAccount.getUserId() != null) {
             BkperUser user = registeredUserService.findById(gcpAccount.getUserId());

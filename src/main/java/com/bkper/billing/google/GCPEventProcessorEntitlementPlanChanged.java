@@ -19,7 +19,7 @@ public class GCPEventProcessorEntitlementPlanChanged extends GCPEventProcessorBa
         GCPPlan gcpPlan = GCPPlan.getByString(entitlement.getPlan());
         Account account = procurementService.providers().accounts().get(entitlement.getAccount()).execute();
         String gcpAccountId = getAccountId(account);
-        GCPAccount gcpAccount = gpaAccountRepository.loadById(gcpAccountId);
+        GCPAccount gcpAccount = gcpAccountRepository.loadById(gcpAccountId);
         if (gcpAccount.getUserId() != null) {
             BkperUser user = registeredUserService.findById(gcpAccount.getUserId());
             billingService.updateBilling(user, gcpPlan);
