@@ -1,8 +1,6 @@
 # GCP Marketplace Java sample integration
 
-This sample is complimentary to the [official integration documentation](https://cloud.google.com/marketplace/docs/partners/integrated-saas/technical-integration-setup).
-
-With focus on Java running on App Engine (Although can be on any infrastructure)
+This sample is complimentary to the [official integration documentation](https://cloud.google.com/marketplace/docs/partners/integrated-saas/technical-integration-setup) with focus on Java running on App Engine (Although it can be on any infrastructure)
 
 You can browse [com.bkper.billing.google](https://github.com/bkper/gcp-marketplace-sample-java/tree/master/src/main/java/com/bkper/billing/google) package for more details
 
