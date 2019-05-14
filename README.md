@@ -8,9 +8,9 @@ With focus on Java running on App Engine (Although can be on any infrastructure)
 
 ## Setup Partner Procurement API
 
-- Generate the API using [google-client-api-generator](https://github.com/google/apis-client-generator)
+- Generate the API using [google-client-api-generator](https://github.com/google/apis-client-generator).
 - [Grant Service Account Token Creator role](https://medium.com/google-cloud/using-serviceaccountactor-iam-role-for-account-impersonation-on-google-cloud-platform-a9e7118480ed) to the App Engine default service account ([project-id]@appspot.serviceaccount.com), on the xxx-public service account you shared with Google.
-- Build the Partner procurement service with the impersonated credentials
+- Build the Partner procurement service with the impersonated credentials:
 
 ```java
     @Provides
@@ -84,7 +84,7 @@ For JWT token verification you can use [Auth0 java-jwt](https://github.com/auth0
 - [Activate the service account](https://cloud.google.com/sdk/gcloud/reference/auth/activate-service-account) using gcloud.
 - [Verify your domain](https://console.cloud.google.com/apis/credentials/domainverification) in the [xxx-public] project.
 - [Create a subscription](https://github.com/GoogleCloudPlatform/java-docs-samples/tree/master/appengine-java8/pubsub) to the topic Google team sent you.
-- Create a servlet to handle the authorized pubsub messages
+- Create a servlet to handle the authorized pubsub messages:
 
 ```java
     @Override
