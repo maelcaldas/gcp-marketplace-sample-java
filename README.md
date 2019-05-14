@@ -13,6 +13,7 @@ With focus on Java running on App Engine (Although can be on any infrastructure)
 - Build the Partner procurement service with the impersonated credentials:
 
 ```java
+    @Provides
     public CloudCommercePartnerProcurementService getGCPPartnerProcurementService(HttpTransport transport,
             JsonFactory jsonFactory) throws IOException {
         return new CloudCommercePartnerProcurementService.Builder(transport, jsonFactory, getRequestInitializer())
