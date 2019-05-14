@@ -22,7 +22,7 @@ public class GCPEventProcessorEntitlementPlanChanged extends GCPEventProcessorBa
         GCPAccount gcpAccount = gpaAccountRepository.loadById(gcpAccountId);
         if (gcpAccount.getUserId() != null) {
             BkperUser user = registeredUserService.findById(gcpAccount.getUserId());
-            billingRepository.updateBilling(user, gcpPlan);
+            billingService.updateBilling(user, gcpPlan);
         }
     }
 

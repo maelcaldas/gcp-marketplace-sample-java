@@ -16,7 +16,7 @@ public class GCPEventProcessorAccountDeleted extends GCPEventProcessorBase {
         GCPAccount gcpAccount = gpaAccountRepository.loadById(gcpAccountId);
         if (gcpAccount.getUserId() != null) {
             BkperUser user = registeredUserService.findById(gcpAccount.getUserId());
-            billingRepository.updateBilling(user, null);
+            billingService.updateBilling(user, null);
         }
         gpaAccountRepository.delete(gcpAccount);
     }

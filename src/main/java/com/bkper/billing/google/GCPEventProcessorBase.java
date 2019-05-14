@@ -18,7 +18,7 @@ public abstract class GCPEventProcessorBase implements GCPEventProcessor {
     protected GCPAccountRepository gpaAccountRepository;
 
     @Inject
-    protected BillingService billingRepository;
+    protected BillingService billingService;
 
     @Inject
     protected CloudCommercePartnerProcurementService procurementService;

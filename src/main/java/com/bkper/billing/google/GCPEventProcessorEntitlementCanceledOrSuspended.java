@@ -22,7 +22,7 @@ public class GCPEventProcessorEntitlementCanceledOrSuspended extends GCPEventPro
 
         if (gcpAccount.getUserId() != null) {
             BkperUser user = registeredUserService.findById(gcpAccount.getUserId());
-            billingRepository.updateBilling(user, null);
+            billingService.updateBilling(user, null);
         }
     }
 
