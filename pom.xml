@@ -70,9 +70,13 @@
       <artifactId>gson</artifactId>
       <version>2.2.4</version>
     </dependency>
+    
+    <dependency>
+      <groupId>com.google.apis</groupId>
+      <artifactId>google-api-services-cloudcommerceprocurement</artifactId>
+      <version>v1-rev20190427-1.25.0</version>        
+    </dependency>    
 
-
-    <!-- GCP Marketplace Integration -->
     <dependency>
       <groupId>com.google.auth</groupId>
       <artifactId>google-auth-library-oauth2-http</artifactId>
@@ -118,9 +122,9 @@
       <url>http://repo1.maven.org/maven2</url>
     </repository>
     <repository>
-      <id>jcenter</id>
-      <url>http://jcenter.bintray.com</url>
-    </repository>
+        <id>bkper-releases</id>
+        <url>https://github.com/bkper/mvn-repo/raw/master/releases</url>
+    </repository>    
   </repositories>
 
 </project>

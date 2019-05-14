@@ -8,9 +8,9 @@ You can browse [com.bkper.billing.google](https://github.com/bkper/gcp-marketpla
 
 ## Setup Partner Procurement API
 
-The parner procurement API was generated with the [google-client-api-generator](https://github.com/google/apis-client-generator)
+The partner procurement API was generated with the [google-client-api-generator](https://github.com/google/apis-client-generator) and the code is published in this [github repo](https://github.com/bkper/cloudcommerceprocurement).
 
-- Add the jar to the project.
+- Add the jar to your project.
 - [Grant Service Account Token Creator role](https://medium.com/google-cloud/using-serviceaccountactor-iam-role-for-account-impersonation-on-google-cloud-platform-a9e7118480ed) to the App Engine default service account ([project-id]@appspot.serviceaccount.com), on the xxx-public service account you shared with Google.
 - Build the Partner procurement service with the impersonated credentials:
 
