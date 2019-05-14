@@ -13,19 +13,21 @@ With focus on Java running on App Engine (Although can be on any infrastructure)
 - Build the Partner procurement service with the impersonated credentials:
 
 ```java
-    @Provides
-    public CloudCommercePartnerProcurementService getGCPPartnerProcurementService(HttpTransport transport, JsonFactory jsonFactory) throws IOException {
-        return new CloudCommercePartnerProcurementService.Builder(transport, jsonFactory, getRequestInitializer()).setApplicationName("bkper").build();
+    public CloudCommercePartnerProcurementService getGCPPartnerProcurementService(HttpTransport transport,
+            JsonFactory jsonFactory) throws IOException {
+        return new CloudCommercePartnerProcurementService.Builder(transport, jsonFactory, getRequestInitializer())
+                .setApplicationName("Your Application").build();
     }
-    
+
     /**
      * 
-     * Build a request initializer for using in the Procurement API as your service account, by impersonating it.
+     * Build a request initializer for using in the Procurement API as your service
+     * account, by impersonating it.
      * 
      */
     private static HttpRequestInitializer getRequestInitializer() throws IOException {
-        ImpersonatedCredentials targetCredentials = ImpersonatedCredentials.create(GoogleCredentials.getApplicationDefault(),
-                GCP_MARKETPLACE_SERVICE_ACCOUNT, null,
+        ImpersonatedCredentials targetCredentials = ImpersonatedCredentials.create(
+                GoogleCredentials.getApplicationDefault(), GCP_MARKETPLACE_SERVICE_ACCOUNT, null,
                 Lists.newArrayList(CloudCommercePartnerProcurementServiceScopes.all()), 300);
         return new HttpCredentialsAdapter(targetCredentials);
     }

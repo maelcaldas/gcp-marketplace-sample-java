@@ -39,20 +39,23 @@ public class GCPModule extends AbstractModule {
         bind(GCPEventProcessor.class).annotatedWith(Names.named(GCPEventType.ENTITLEMENT_SUSPENDED.name())).to(GCPEventProcessorEntitlementCanceledOrSuspended.class);
         bind(GCPEventProcessor.class).annotatedWith(Names.named(GCPEventType.ENTITLEMENT_DELETED.name())).to(GCPEventProcessorEntitlementDeleted.class);
     }
-    
+
     @Provides
-    public CloudCommercePartnerProcurementService getGCPPartnerProcurementService(HttpTransport transport, JsonFactory jsonFactory) throws IOException {
-        return new CloudCommercePartnerProcurementService.Builder(transport, jsonFactory, getRequestInitializer()).setApplicationName("bkper").build();
+    public CloudCommercePartnerProcurementService getGCPPartnerProcurementService(HttpTransport transport,
+            JsonFactory jsonFactory) throws IOException {
+        return new CloudCommercePartnerProcurementService.Builder(transport, jsonFactory, getRequestInitializer())
+                .setApplicationName("Your Application").build();
     }
-    
+
     /**
      * 
-     * Build a request initializer for using in the Procurement API as your service account, by impersonating it.
+     * Build a request initializer for using in the Procurement API as your service
+     * account, by impersonating it.
      * 
      */
     private static HttpRequestInitializer getRequestInitializer() throws IOException {
-        ImpersonatedCredentials targetCredentials = ImpersonatedCredentials.create(GoogleCredentials.getApplicationDefault(),
-                GCP_MARKETPLACE_SERVICE_ACCOUNT, null,
+        ImpersonatedCredentials targetCredentials = ImpersonatedCredentials.create(
+                GoogleCredentials.getApplicationDefault(), GCP_MARKETPLACE_SERVICE_ACCOUNT, null,
                 Lists.newArrayList(CloudCommercePartnerProcurementServiceScopes.all()), 300);
         return new HttpCredentialsAdapter(targetCredentials);
     }
