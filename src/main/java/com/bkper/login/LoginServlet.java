@@ -144,7 +144,7 @@ public class LoginServlet extends HttpServlet {
         Algorithm algorithm = Algorithm.RSA256(publicKey, null);
         JWTVerifier verifier = JWT.require(algorithm)
                 .withIssuer("https://www.googleapis.com/robot/v1/metadata/x509/cloud-commerce-partner@system.gserviceaccount.com")
-                .withAudience("app.bkper.com")
+                .withAudience("your.domain.com")
                 .build();
         
         //Verify
