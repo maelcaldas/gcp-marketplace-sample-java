@@ -12,7 +12,7 @@ With focus on Java running on App Engine (Although can be on any infrastructure)
 - Grant **Service Account Token Creator** role to your infrastructure default service account. On gae is usuall <project-id>@appspot.serviceaccount.com
 - Build the Partner procurement service with the impersonated credentials
 
-```
+```java
     @Provides
     public CloudCommercePartnerProcurementService getGCPPartnerProcurementService(HttpTransport transport, JsonFactory jsonFactory) throws IOException {
         return new CloudCommercePartnerProcurementService.Builder(transport, jsonFactory, getRequestInitializer()).setApplicationName("bkper").build();
@@ -41,7 +41,7 @@ https://cloud.google.com/iam/docs/understanding-service-accounts#impersonating_a
 
 For JWT token verification you can use [Auth0 java-jwt](https://github.com/auth0/java-jwt)
 
-```
+```java
     private String verifyGcpAccountIdToken(String gcpJwtToken) throws IOException, CertificateException {
         if (gcpJwtToken == null) {
             return null;
@@ -83,10 +83,10 @@ For JWT token verification you can use [Auth0 java-jwt](https://github.com/auth0
 
 - [Activate a service account](https://cloud.google.com/sdk/gcloud/reference/auth/activate-service-account) using gcloud
 - [Verify your domain](https://console.cloud.google.com/apis/credentials/domainverification) in the [xxx-public] project of the service account 
-- [Create a subscription] (https://github.com/GoogleCloudPlatform/java-docs-samples/tree/master/appengine-java8/pubsub) to the topic Google team sent you
+- [Create a subscription](https://github.com/GoogleCloudPlatform/java-docs-samples/tree/master/appengine-java8/pubsub) to the topic Google team sent you
 - Create a servlet to handle the authorized pubsub messages
 
-```
+```java
     @Override
     public void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
         
