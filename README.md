@@ -81,9 +81,9 @@ For JWT token verification you can use [Auth0 java-jwt](https://github.com/auth0
 
 ### Integrate Pub/Sub
 
-- [Activate a service account](https://cloud.google.com/sdk/gcloud/reference/auth/activate-service-account) using gcloud
-- [Verify your domain](https://console.cloud.google.com/apis/credentials/domainverification) in the [xxx-public] project of the service account 
-- [Create a subscription](https://github.com/GoogleCloudPlatform/java-docs-samples/tree/master/appengine-java8/pubsub) to the topic Google team sent you
+- [Activate the service account](https://cloud.google.com/sdk/gcloud/reference/auth/activate-service-account) using gcloud.
+- [Verify your domain](https://console.cloud.google.com/apis/credentials/domainverification) in the [xxx-public] project.
+- [Create a subscription](https://github.com/GoogleCloudPlatform/java-docs-samples/tree/master/appengine-java8/pubsub) to the topic Google team sent you.
 - Create a servlet to handle the authorized pubsub messages
 
 ```java
