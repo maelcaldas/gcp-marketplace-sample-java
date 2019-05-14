@@ -4,7 +4,7 @@ This sample is complimentary to the [official integration documentation](https:/
 
 You can browse [com.bkper.billing.google](https://github.com/bkper/gcp-marketplace-sample-java/tree/master/src/main/java/com/bkper/billing/google) package for more details on how to process each event type and interact with the Partner Procurement API.
 
-Bellow there are explanations and snippets of some key parts.
+Follow bellow some explanations and snippets of the key parts.
 
 ## Setup Partner Procurement API
 
