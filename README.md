@@ -37,9 +37,9 @@ https://cloud.google.com/iam/docs/service-accounts#service_account_permissions
 https://cloud.google.com/iam/docs/understanding-service-accounts#impersonating_a_service_account
 
 
-## Verify JWT Token
+## Verify JWT
 
-For JWT token verification you can use [Auth0 java-jwt](https://github.com/auth0/java-jwt)
+For JWT verification you can use Auth0 [java-jwt](https://github.com/auth0/java-jwt)
 
 ```java
     private String verifyGcpAccountIdToken(String gcpJwtToken) throws IOException, CertificateException {
