@@ -16,61 +16,6 @@
         <url-pattern>/*</url-pattern>
     </filter-mapping>
 
-    <listener>
-        <listener-class>com.bkper.server.BkperGuiceServletContextListener</listener-class>
-    </listener>
-    
-    <servlet>
-        <servlet-name>mailhandler</servlet-name>
-        <servlet-class>com.bkper.server.mail.MailHandlerServlet</servlet-class>
-    </servlet>
-
-    <servlet>
-        <servlet-name>attachments</servlet-name>
-        <servlet-class>com.bkper.server.img.TransactionImagesServerServlet</servlet-class>
-    </servlet>
-
-    <servlet-mapping>
-        <servlet-name>mailhandler</servlet-name>
-        <url-pattern>/_ah/mail/*</url-pattern>
-    </servlet-mapping>
-
-    <servlet-mapping>
-        <servlet-name>attachments</servlet-name>
-        <url-pattern>/gcs</url-pattern>
-    </servlet-mapping>    
-
-    <security-constraint>
-        <web-resource-collection>
-            <web-resource-name></web-resource-name>
-            <description></description>
-            <url-pattern>/admin/*</url-pattern>
-            <url-pattern>/adm/*</url-pattern>
-            <url-pattern>/appstats/*</url-pattern>
-            <url-pattern>/tasks/*</url-pattern>
-            <url-pattern>/cron/*</url-pattern>
-            <url-pattern>/_ah/queue/__deferred__</url-pattern>
-            <url-pattern>/_ah/push-handlers/*</url-pattern>
-            <url-pattern>/refactor</url-pattern>
-            <url-pattern>/refactoring.html</url-pattern>
-        </web-resource-collection>
-        <auth-constraint>
-            <role-name>admin</role-name>
-        </auth-constraint>
-    </security-constraint>
-
-    <security-constraint>
-        <web-resource-collection>
-            <web-resource-name></web-resource-name>
-            <description></description>
-            <url-pattern>/welcome</url-pattern>
-            <url-pattern>/post</url-pattern>
-            <url-pattern>/ping</url-pattern>
-        </web-resource-collection>
-        <auth-constraint>
-            <role-name>*</role-name>
-        </auth-constraint>
-    </security-constraint>
 
     <security-constraint>
         <web-resource-collection>
