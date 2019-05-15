@@ -1,7 +1,8 @@
-package com.bkper.billing.google;
+package com.bkper.billing.google.processors;
 
 import java.io.IOException;
 
+import com.bkper.billing.google.GCPAccount;
 import com.bkper.billing.google.pubsub.GCPPubsubMessageData;
 import com.bkper.objectify.Transact;
 import com.bkper.user.BkperUser;

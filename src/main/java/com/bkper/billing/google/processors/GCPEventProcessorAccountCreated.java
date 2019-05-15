@@ -1,5 +1,6 @@
-package com.bkper.billing.google;
+package com.bkper.billing.google.processors;
 
+import com.bkper.billing.google.GCPAccount;
 import com.bkper.billing.google.pubsub.GCPPubsubMessageData;
 import com.bkper.objectify.Transact;
 import com.googlecode.objectify.TxnType;
