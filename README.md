@@ -2,9 +2,10 @@
 
 This sample is complimentary to the [official integration documentation](https://cloud.google.com/marketplace/docs/partners/integrated-saas/technical-integration-setup) with focus on Java running on App Engine (Although it can be on any infrastructure)
 
-You can browse [com.bkper.billing.google](https://github.com/bkper/gcp-marketplace-sample-java/tree/master/src/main/java/com/bkper/billing/google) package for more details on how to process each event type and interact with the Partner Procurement API.
-
 Follow bellow some explanations and snippets of the key parts.
+
+You can browse [com.bkper.billing.google](https://github.com/bkper/gcp-marketplace-sample-java/tree/master/src/main/java/com/bkper/billing/google) package for more details.
+
 
 ## Setup Partner Procurement API
 
@@ -82,6 +83,8 @@ For JWT verification you can use Auth0 [java-jwt](https://github.com/auth0/java-
         return jwt.getSubject();
     }
 ```
+
+See more details about the auth flow at the [LoginServlet](https://github.com/bkper/gcp-marketplace-sample-java/blob/master/src/main/java/com/bkper/login/LoginServlet.java)
 
 
 ### Integrate Pub/Sub
