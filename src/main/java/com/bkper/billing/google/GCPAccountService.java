@@ -69,7 +69,7 @@ public class GCPAccountService {
     }
 
     private Entitlement getPendingActivationEntitlement(GCPAccount gcpAccoount) throws IOException {
-        String filter = String.format("account=%s, state=ENTITLEMENT_ACTIVATION_REQUESTED", gcpAccoount.getId());
+        String filter = String.format("account=%s state=ENTITLEMENT_ACTIVATION_REQUESTED", gcpAccoount.getId());
         List<Entitlement> entitlements = listEntitlements(filter);
         if (entitlements != null && entitlements.size() == 1) {
             Entitlement entitlement = entitlements.get(0);
