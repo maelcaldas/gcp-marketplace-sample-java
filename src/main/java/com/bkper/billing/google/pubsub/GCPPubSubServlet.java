@@ -64,7 +64,7 @@ public class GCPPubSubServlet extends HttpServlet {
             }
             String authorization = authorizationHeader.split(" ")[1];
             GoogleIdTokenVerifier verifier = new GoogleIdTokenVerifier.Builder(transport, jsonFactory)
-                    .setAudience(Collections.singletonList("gcpmarketplace.bkper.com")).build();
+                    .setAudience(Collections.singletonList("subdomain.yourdomain.com")).build();
             
             verifier.verify(authorization);
 

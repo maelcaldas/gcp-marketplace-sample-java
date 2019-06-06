@@ -113,7 +113,7 @@ See more details about the auth flow at the [LoginServlet](https://github.com/bk
             }
             String authorization = authorizationHeader.split(" ")[1];
             GoogleIdTokenVerifier verifier = new GoogleIdTokenVerifier.Builder(transport, jsonFactory)
-                    .setAudience(Collections.singletonList("gcpmarketplace.bkper.com")).build();
+                    .setAudience(Collections.singletonList("subdomain.yourdomain.com")).build();
             
             verifier.verify(authorization);
 
