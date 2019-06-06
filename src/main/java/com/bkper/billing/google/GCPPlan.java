@@ -8,15 +8,9 @@ package com.bkper.billing.google;
  *
  */
 public enum GCPPlan {
-    free,
-    standard,
-    business,
-    professional50k,
-    professional100k,
-    professional300k,
-    professional1m,
-    professional5m,
-    professional50m;
+    PLAN1,
+    PLAN2,
+    PLAN3;
     
     public static GCPPlan getByString(String name) {
         try {

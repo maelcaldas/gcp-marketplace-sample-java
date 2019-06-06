@@ -2,6 +2,7 @@ package com.bkper.billing.google.processors;
 
 import java.io.IOException;
 
+import com.bkper.billing.google.GCPAccountService;
 import com.bkper.billing.google.pubsub.GCPPubsubMessageData;
 import com.bkper.objectify.Transact;
 import com.google.cloudcommerceprocurement.v1.model.ApproveEntitlementPlanChangeRequest;
@@ -16,7 +17,7 @@ public class GCPEventProcessorEntitlementPlanChangeRequested extends GCPEventPro
         String entitlementId = message.getEntitlement().getId();
         ApproveEntitlementPlanChangeRequest content = new ApproveEntitlementPlanChangeRequest();
         content.setPendingPlanName(message.getEntitlement().getNewPlan().name());
-        String name = PROVIDER_PATH + "/entitlements/" + entitlementId;
+        String name = GCPAccountService.PROVIDER_PATH + "/entitlements/" + entitlementId;
         procurementService.providers().entitlements().approvePlanChange(name, content).execute();
     }
 }

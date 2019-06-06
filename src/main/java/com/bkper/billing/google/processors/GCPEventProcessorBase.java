@@ -13,8 +13,6 @@ import com.google.inject.Inject;
 
 public abstract class GCPEventProcessorBase implements GCPEventProcessor {
 
-    public static String PARTNER_ID = "xxxx-public"; // 
-    public static String PROVIDER_PATH = "providers/" + PARTNER_ID;
 
     @Inject
     protected GCPAccountRepository gcpAccountRepository;
@@ -32,9 +30,7 @@ public abstract class GCPEventProcessorBase implements GCPEventProcessor {
     protected GCPAccountService gcpAccountService;
 
     protected Entitlement getEntitlement(String entitlementId) throws IOException {
-        String name = PROVIDER_PATH + "/entitlements/" + entitlementId;
-        Entitlement entitlement = procurementService.providers().entitlements().get(name).execute();
-        return entitlement;
+        return gcpAccountService.getEntitlement(entitlementId);
     }
 
     protected String getAccountId(Account account) {

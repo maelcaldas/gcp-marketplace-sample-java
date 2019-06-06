@@ -1,13 +1,17 @@
 package com.bkper.billing.google;
 
+import static com.googlecode.objectify.ObjectifyService.ofy;
+
 import java.io.IOException;
 import java.util.List;
 import java.util.logging.Logger;
 
 import com.bkper.billing.BillingService;
-import com.bkper.billing.google.processors.GCPEventProcessorBase;
 import com.bkper.objectify.Transact;
 import com.bkper.user.BkperUser;
+import com.google.appengine.api.taskqueue.Queue;
+import com.google.appengine.api.taskqueue.QueueFactory;
+import com.google.appengine.api.taskqueue.TaskOptions;
 import com.google.cloudcommerceprocurement.v1.CloudCommercePartnerProcurementService;
 import com.google.cloudcommerceprocurement.v1.model.ApproveAccountRequest;
 import com.google.cloudcommerceprocurement.v1.model.ApproveEntitlementRequest;
@@ -17,6 +21,9 @@ import com.google.inject.Inject;
 import com.googlecode.objectify.TxnType;
 
 public class GCPAccountService {
+    
+    public static String PARTNER_ID = "xxxx-public"; // 
+    public static String PROVIDER_PATH = "providers/" + PARTNER_ID;
 
     @Inject
     private GCPAccountRepository gpaAccountRepository;
@@ -28,14 +35,7 @@ public class GCPAccountService {
     private CloudCommercePartnerProcurementService procurementService;
     
     private static final Logger LOGGER = Logger.getLogger(GCPAccountService.class.getName());
-
-    public void approveEntitlement(String entitlementId) throws IOException {
-        LOGGER.info("Approving entitlement: " + entitlementId);
-        ApproveEntitlementRequest content = new ApproveEntitlementRequest();
-        String name = GCPEventProcessorBase.PROVIDER_PATH + "/entitlements/" + entitlementId;
-        procurementService.providers().entitlements().approve(name, content).execute();
-    }
-
+    
     @Transact(TxnType.REQUIRED)
     public GCPAccount approveAccount(BkperUser user, String gcpAccountId) throws IOException {
         GCPAccount account = gpaAccountRepository.loadById(gcpAccountId);
@@ -43,21 +43,23 @@ public class GCPAccountService {
         gpaAccountRepository.persist(account);
         ApproveAccountRequest content = new ApproveAccountRequest();
         content.setApprovalName("signup");
-        String name = GCPEventProcessorBase.PROVIDER_PATH + "/accounts/" + gcpAccountId;
+        String name = PROVIDER_PATH + "/accounts/" + gcpAccountId;
         procurementService.providers().accounts().approve(name, content).execute();
         
-        GCPPlan plan = GCPPlan.free;
+        //Approve pending entitlements async to avoid break approval in case of failing
+        Queue queue = QueueFactory.getQueue("pending-entitlemenst-queue");
+        queue.add(ofy().getTransaction(), TaskOptions.Builder.withPayload(new ApprovePendingEntitlementsTask(account)));
         
-        Entitlement pendingActivationEntitlement = getPendingActivationEntitlement(account);
-        if (pendingActivationEntitlement != null) {
-            String entitlementId = getEntitlementId(pendingActivationEntitlement);
-            approveEntitlement(entitlementId);
-            plan = GCPPlan.getByString(pendingActivationEntitlement.getPlan());
-        }
-        
-        billingService.updateBilling(user, account, plan);
         return account;
     }
+
+    public void approveEntitlement(String entitlementId) throws IOException {
+        LOGGER.info("Approving entitlement: " + entitlementId);
+        ApproveEntitlementRequest content = new ApproveEntitlementRequest();
+        String name = PROVIDER_PATH + "/entitlements/" + entitlementId;
+        procurementService.providers().entitlements().approve(name, content).execute();
+    }
+
 
     private String getEntitlementId(Entitlement entitlement) {
         if (entitlement == null) {
@@ -77,9 +79,15 @@ public class GCPAccountService {
         }
         return null;
     }
+    
+    public Entitlement getEntitlement(String entitlementId) throws IOException {
+        String name = PROVIDER_PATH + "/entitlements/" + entitlementId;
+        Entitlement entitlement = procurementService.providers().entitlements().get(name).execute();
+        return entitlement;
+    }
 
-    private List<Entitlement> listEntitlements(String filter) throws IOException {
-        ListEntitlementsResponse response = procurementService.providers().entitlements().list(GCPEventProcessorBase.PROVIDER_PATH).setFilter(filter).execute();
+    public List<Entitlement> listEntitlements(String filter) throws IOException {
+        ListEntitlementsResponse response = procurementService.providers().entitlements().list(PROVIDER_PATH).setFilter(filter).execute();
         List<Entitlement> entitlements = response.getEntitlements();
         return entitlements;
     }
