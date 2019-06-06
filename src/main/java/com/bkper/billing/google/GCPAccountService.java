@@ -36,6 +36,12 @@ public class GCPAccountService {
     
     private static final Logger LOGGER = Logger.getLogger(GCPAccountService.class.getName());
     
+    /**
+     * 
+     * Handles the approval account in a single transaction, to approve it on both sides,
+     * as well as start a queue to approve pending entitlements asynchronously
+     * 
+     */
     @Transact(TxnType.REQUIRED)
     public GCPAccount approveAccount(BkperUser user, String gcpAccountId) throws IOException {
         GCPAccount account = gpaAccountRepository.loadById(gcpAccountId);
@@ -46,7 +52,7 @@ public class GCPAccountService {
         String name = PROVIDER_PATH + "/accounts/" + gcpAccountId;
         procurementService.providers().accounts().approve(name, content).execute();
         
-        //Approve pending entitlements async to avoid break approval in case of failing
+        //Approve pending entitlements async to avoid break approval in case of FAILED_PRECONDITION error
         Queue queue = QueueFactory.getQueue("pending-entitlemenst-queue");
         queue.add(ofy().getTransaction(), TaskOptions.Builder.withPayload(new ApprovePendingEntitlementsTask(account)));
         
