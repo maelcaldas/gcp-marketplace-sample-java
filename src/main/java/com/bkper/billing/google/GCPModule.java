@@ -43,9 +43,9 @@ public class GCPModule extends AbstractModule {
         bind(GCPEventProcessor.class).annotatedWith(Names.named(GCPEventType.ENTITLEMENT_PLAN_CHANGE_REQUESTED.name())).to(GCPEventProcessorEntitlementPlanChangeRequested.class);
         bind(GCPEventProcessor.class).annotatedWith(Names.named(GCPEventType.ENTITLEMENT_PLAN_CHANGED.name())).to(GCPEventProcessorEntitlementPlanChanged.class);
         bind(GCPEventProcessor.class).annotatedWith(Names.named(GCPEventType.ENTITLEMENT_PENDING_CANCELLATION.name())).to(GCPEventProcessorEntitlementCanceledOrSuspended.class);
-        bind(GCPEventProcessor.class).annotatedWith(Names.named(GCPEventType.ENTITLEMENT_ACTIVE.name())).to(GCPEventProcessorEntitlementApproved.class);
         bind(GCPEventProcessor.class).annotatedWith(Names.named(GCPEventType.ENTITLEMENT_CANCELLED.name())).to(GCPEventProcessorEntitlementCanceledOrSuspended.class);
         bind(GCPEventProcessor.class).annotatedWith(Names.named(GCPEventType.ENTITLEMENT_SUSPENDED.name())).to(GCPEventProcessorEntitlementCanceledOrSuspended.class);
+        bind(GCPEventProcessor.class).annotatedWith(Names.named(GCPEventType.ENTITLEMENT_ACTIVE.name())).to(GCPEventProcessorEntitlementApproved.class);
         bind(GCPEventProcessor.class).annotatedWith(Names.named(GCPEventType.ENTITLEMENT_DELETED.name())).to(GCPEventProcessorEntitlementDeleted.class);
     }
 
@@ -57,10 +57,10 @@ public class GCPModule extends AbstractModule {
     }
 
     /**
-     * 
+     *
      * Build a request initializer for using in the Procurement API as your service
      * account, by impersonating it.
-     * 
+     *
      */
     private static HttpRequestInitializer getRequestInitializer() throws IOException {
         ImpersonatedCredentials targetCredentials = ImpersonatedCredentials.create(
@@ -81,7 +81,7 @@ public class GCPModule extends AbstractModule {
     public int hashCode() {
         return Objects.hash(hashcode);
     }
-    
+
     private static long longHash(String string) {
         long h = 98764321261L;
         int l = string.length();
